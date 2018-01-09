@@ -26,7 +26,7 @@
 			<form>
 				<input type="text" id="userId" class="fadeIn second" name="userId" placeholder="login"> 
 				<input type="text" id="userPwd" class="fadeIn third" name="userPwd" placeholder="password"> 
-				<input type="button" id="loginBtn" value="login" onclick="checkValue()">
+				<input class="btn btn-lg btn-primary btn-block" type="button" id="loginBtn" value="login" onclick="checkValue()">
 			</form>
 
 			<!-- Remind Passowrd -->
@@ -41,6 +41,7 @@
 <script>
 
 function checkValue(){
+	alert(1);
 	var objs = $(".container");
 	var userId = $("#userId").val().trim();
 	var userPwd = $("#userPwd").val().trim();

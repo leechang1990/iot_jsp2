@@ -3,7 +3,7 @@ package com.iot.test.vo;
 public class UserClass {
 	private int ciNo;
 	private String ciName;
-	private String CiDesc;
+	private String ciDesc;
 	private int uiNo;
 	private String uiName;
 	private int uiAge;
@@ -25,10 +25,10 @@ public class UserClass {
 		this.ciName = ciName;
 	}
 	public String getCiDesc() {
-		return CiDesc;
+		return ciDesc;
 	}
 	public void setCiDesc(String ciDesc) {
-		CiDesc = ciDesc;
+		this.ciDesc = ciDesc;
 	}
 	public int getUiNo() {
 		return uiNo;
@@ -74,7 +74,7 @@ public class UserClass {
 	}
 	@Override
 	public String toString() {
-		return "UserClass [ciNo=" + ciNo + ", ciName=" + ciName + ", CiDesc=" + CiDesc + ", uiNo=" + uiNo + ", uiName="
+		return "UserClass [ciNo=" + ciNo + ", ciName=" + ciName + ", ciDesc=" + ciDesc + ", uiNo=" + uiNo + ", uiName="
 				+ uiName + ", uiAge=" + uiAge + ", uiId=" + uiId + ", uiPwd=" + uiPwd + ", uiRegdate=" + uiRegdate
 				+ ", address=" + address + "]";
 	}

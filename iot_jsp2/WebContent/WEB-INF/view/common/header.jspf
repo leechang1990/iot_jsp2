@@ -1,0 +1,39 @@
+<%@page import="com.iot.test.vo.UserClass"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+String rootPath=request.getContextPath();
+UserClass user=(UserClass)session.getAttribute("user");
+String loginMenu = "Login";
+String loginUrl = rootPath + "/view/user/login";
+if(user!=null){
+	loginMenu = "Logout";
+	loginUrl = rootPath + "/user/logout";
+}
+String uri = request.getRequestURI();
+int idx =uri.lastIndexOf(",");
+if(idx!=-1){
+	uri = uri.substring(8,idx);
+}
+%>
+<script>
+$(document).ready(function(){
+	$("li a[href='<%=uri%>']").parent().attr("class","active");
+})
+
+</script>
+<div class="container">
+      <div class="masthead">
+        <h3 class="text-muted">Project name</h3>
+        <nav >
+          <ul class="nav nav-justified">
+           	<li active><a href="<%=rootPath%>/">Home</a></li>
+            <li><a href="<%=loginUrl%>"><%=loginMenu%></a></li>
+            <li><a href="<%=rootPath%>/view/user/list">User List</a></li>
+            <li><a href="<%=rootPath%>/view/user/classlist">Class List</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Jumbotron -->
+    </div> <!-- /container -->
+      

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.iot.test.vo.UserClass;
 
 public interface UserDAO {
-	ArrayList<UserClass> SelectUserList();
+	ArrayList<UserClass> selectUserList();
 	
 	UserClass selectUser(int uiNo);
 	UserClass selectUser(String uiId);

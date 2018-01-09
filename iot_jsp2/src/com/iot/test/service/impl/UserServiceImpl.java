@@ -1,6 +1,8 @@
 package com.iot.test.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,8 +32,7 @@ public class UserServiceImpl implements UserService{
 				hm.put("login", "no");
 			}else {
 				HttpSession hs=req.getSession();
-				hs.setAttribute("user", uc);
-				
+				hs.setAttribute("user", checkUc);
 			}
 		}else {
 			 hm.put("msg", "아이디를 확인하세요");
@@ -45,5 +46,56 @@ public class UserServiceImpl implements UserService{
 		HttpSession hs = req.getSession();
 		hs.invalidate();//세션값을 모조리 소멸시킴 
 	}
-	
+
+	@Override
+	public void signin(HttpServletRequest req) {
+		String json = req.getParameter("param");
+		UserClass uc = gs.fromJson(json,UserClass.class);
+		int result = ud.insertUser(uc);
+		Map<String,String> rm = new HashMap<String,String>();
+		rm.put("result", "no");
+		rm.put("msg", "실패했어 이유는 몰라");
+		if(result==1) {
+			rm.put("result", "ok");
+			rm.put("msg", "성공했어");
+		}
+		req.setAttribute("resStr", gs.toJson(rm));
+	}
+
+	@Override
+	public ArrayList<UserClass> getUserList() {
+		return ud.selectUserList();
+	}
+
+	@Override
+	public String deleteUser(HttpServletRequest req) {
+
+		int uiNo=Integer.parseInt(req.getParameter("uiNo"));
+		UserClass uc=new UserClass();
+		uc.setUiNo(uiNo);
+		int result = ud.deletUser(uc);
+		Map<String,String> rm = new HashMap<String,String>();
+		rm.put("result", "no");
+		rm.put("msg", "삭제가 실패했어 ");
+		if(result==1) {
+			rm.put("result", "ok");
+			rm.put("msg", "삭제가 성공했어");
+		}
+		return gs.toJson(rm);
+	}
+
+	@Override
+	public String updateUser(HttpServletRequest req) {
+		String param =req.getParameter("param");
+		UserClass uc=gs.fromJson(param, UserClass.class);
+		int result =ud.updateUser(uc);
+		Map<String,String> rm = new HashMap<String,String>();
+		rm.put("result", "no");
+		rm.put("msg", "수정이 실패했어 ");
+		if(result==1) {
+			rm.put("result", "ok");
+			rm.put("msg", "수정이 성공했어");
+		}
+		return gs.toJson(rm);
+	}	
 }
